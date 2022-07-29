@@ -27,7 +27,7 @@
 
 import MyInput from './MyInput/MyInput.vue';
 import MyButton from './MyButton/MyButton.vue';
-import MyPreloader from '../MyPreloader/MyPreloader.vue';
+import MyPreloader from '../common/MyPreloader/MyPreloader.vue';
 
 const urlRegex = /(https?:\/\/.*)/ig;
 
@@ -37,6 +37,12 @@ export default {
     MyInput,
     MyButton,
     MyPreloader,
+  },
+  props: {
+    addNewCard: {
+      type: Function,
+      required: true,
+    },
   },
   data() {
     return {

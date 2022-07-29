@@ -111,18 +111,17 @@ export default {
     border: 1px solid transparent;
     transition: all 0.2s ease-in;
 
-    textarea {
-      resize: vertical;
-      min-height: 104px;
-      max-height: 400px;
-      padding-left: 10px;
-    }
-
     &:focus {
       transform: scale(1.05);
       border: 1px solid rgb(0, 68, 255);
       background-color: rgb(243, 243, 243);
     }
+  }
+  textarea {
+    resize: vertical;
+    min-height: 104px;
+    max-height: 400px;
+    padding-left: 10px;
   }
   span {
     position: absolute;
