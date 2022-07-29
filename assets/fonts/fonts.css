@@ -1,0 +1,20 @@
+@font-face {
+  src:
+    url('./SourceSansPro/ttf/SourceSansPro-Regular.ttf') format('truetype');
+  font-family: 'SourceSansPro';
+  font-weight: 400;
+}
+
+@font-face {
+  src:
+    url('./SourceSansPro/ttf/SourceSansPro-SemiBold.ttf') format('truetype');
+  font-family: 'SourceSansPro';
+  font-weight: 600;
+}
+
+@font-face {
+  src:
+    url('./Inter/ttf/Inter-SemiBold.ttf') format('truetype');
+  font-family: 'Inter';
+  font-weight: 600;
+}
