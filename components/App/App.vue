@@ -3,6 +3,7 @@
   <div class="test-idaproject">
     <header class="header">
       <h1>Добавление товара</h1>
+      <NuxtFilter />
     </header>
 
     <main class="main">
@@ -19,12 +20,14 @@
 
 import MyForm from '../MyForm/MyForm.vue';
 import ListCards from '../ListCards/ListCards.vue';
+import NuxtFilter from '../NuxtFilter/NuxtFilter.vue';
 
 export default {
   name: 'App',
   components: {
     MyForm,
     ListCards,
+    NuxtFilter,
   },
   data() {
     return {
