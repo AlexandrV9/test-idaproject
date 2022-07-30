@@ -1,6 +1,9 @@
 <template>
   <li class="card">
-    <button class="button-delete">
+    <button
+      class="button-delete"
+      @click="deleteCard(data.id)"
+    >
       <img
         class="button-delete-icon"
         src="../../../assets/icons/trash.svg"
@@ -29,7 +32,7 @@
           {{ data.descriprion }}
         </p>
         <p class="price">
-          10 000 руб.
+          {{ data.price + ' руб.' }}
         </p>
       </div>
     </div>
@@ -48,6 +51,10 @@ export default {
   props: {
     data: {
       type: Object,
+      required: true,
+    },
+    deleteCard: {
+      type: Function,
       required: true,
     },
   },

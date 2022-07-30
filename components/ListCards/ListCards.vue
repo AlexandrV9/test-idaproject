@@ -4,6 +4,7 @@
       v-for="card in cards"
       :key="card.id"
       :data="card"
+      :delete-card="deleteCard"
     />
   </ul>
 </template>
@@ -19,6 +20,10 @@ export default {
   props: {
     cards: {
       type: Array,
+      required: true,
+    },
+    deleteCard: {
+      type: Function,
       required: true,
     },
   },
