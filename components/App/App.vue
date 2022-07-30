@@ -7,7 +7,10 @@
 
     <main class="main">
       <MyForm :add-new-card="addNewCard" />
-      <ListCards :cards="cards" />
+      <ListCards
+        :cards="cards"
+        :delete-card="deleteCard"
+      />
     </main>
   </div>
 </template>
@@ -31,21 +34,21 @@ export default {
           title: 'test',
           url: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
           descriprion: 'wecwedewdewdwedewd',
-          price: 12121,
+          price: '12 121',
         },
         {
           id: 6,
           title: 'test',
           url: 'https://mishka-shop.com/upload/resize_cache/webp/upload/iblock/8c5/8c55b52e342794925bbefff1638798ab.webp',
           descriprion: 'wecd',
-          price: 12121,
+          price: '12 121',
         },
         {
           id: 7,
           title: 'test',
           url: 'https://mishka-shop.com/upload/resize_cache/webp/upload/iblock/8c5/8c55b52e342794925bbefff1638798ab.webp',
           descriprion: 'wecd',
-          price: 12121,
+          price: '12 121',
         },
       ],
     };
@@ -56,6 +59,13 @@ export default {
         ...data,
         id: this.cards[this.cards.length - 1].id + 1,
       });
+    },
+    deleteCard(id) {
+      const indexCard = this.cards.findIndex((card) => card.id === id);
+      this.cards = [
+        ...this.cards.slice(0, indexCard),
+        ...this.cards.slice(indexCard + 1),
+      ];
     },
   },
 };

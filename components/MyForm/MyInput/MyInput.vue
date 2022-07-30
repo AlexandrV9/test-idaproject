@@ -9,9 +9,9 @@
       :type="data.typeInput"
       :placeholder="data.textPlaceholder"
       :tabindex="data.id"
-      :class="(!data.isValid && isTouched ? 'error' : '')"
+      :class="(!data.isValid && data.isTouched ? 'error' : '')"
       @input="$emit('input', $event.target.value), changeValue()"
-      @blur="isTouched = true"
+      @blur="$emit('blur')"
     >
     <input
       v-if="data.typeInput === 'number'"
@@ -26,9 +26,9 @@
       type="text"
       :placeholder="data.textPlaceholder"
       :tabindex="data.id"
-      :class="(!data.isValid && isTouched ? 'error' : '')"
+      :class="(!data.isValid && data.isTouched ? 'error' : '')"
       @input="$emit('input', $event.target.value), changeValue(), $emit('valid')"
-      @blur="isTouched = true"
+      @blur="$emit('blur')"
     >
     <textarea
       v-if="data.typeInput === 'textarea'"
@@ -36,9 +36,10 @@
       :placeholder="data.textPlaceholder"
       class="test-idaproject__textarea"
       @input="$emit('input', $event.target.value)"
+      @blur="$emit('blur')"
     />
     <span
-      v-if="data.isError && isTouched"
+      v-if="data.isError && data.isTouched"
       class="test-idaproject__field-error"
     >{{ data.isError }}</span>
   </div>
@@ -53,12 +54,7 @@ export default {
       required: true,
     },
   },
-  emits: ['input', 'valid'],
-  data() {
-    return {
-      isTouched: false,
-    };
-  },
+  emits: ['input', 'valid', 'blur'],
   methods: {
     changeValue() {
       this.data.isCheckValid();

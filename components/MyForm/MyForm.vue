@@ -9,11 +9,13 @@
         :key="item.id"
         v-model.lazy="item.value"
         :data="item"
+        @input="changeValue($event)"
+        @blur="item.isCheckTouched()"
       />
 
       <MyButton
         v-if="!isLoading"
-        :disabled="!isFormValid"
+        :disabled="(!isValid)"
         text-btn="Добавить товар"
       />
       <MyPreloader
@@ -28,8 +30,6 @@
 import MyInput from './MyInput/MyInput.vue';
 import MyButton from './MyButton/MyButton.vue';
 import MyPreloader from '../common/MyPreloader/MyPreloader.vue';
-
-const urlRegex = /(https?:\/\/.*)/ig;
 
 export default {
   name: 'MyForm',
@@ -57,6 +57,10 @@ export default {
           isValid: false,
           isError: 'Поле является обязательным',
           value: '',
+          isTouched: false,
+          isCheckTouched() {
+            this.isTouched = true;
+          },
           isCheckValid() {
             if (!this.value) {
               this.isError = 'Поле является обязательным';
@@ -78,6 +82,10 @@ export default {
           isError: '',
           isValid: true,
           value: '',
+          isTouched: false,
+          isCheckTouched() {
+            this.isTouched = true;
+          },
         },
         {
           id: 3,
@@ -89,17 +97,13 @@ export default {
           isValid: false,
           isError: 'Поле является обязательным',
           value: '',
+          isTouched: false,
+          isCheckTouched() {
+            this.isTouched = true;
+          },
           async isCheckValid() {
             if (!this.value) {
               this.isError = 'Поле является обязательным';
-              this.isValid = false;
-              return;
-            }
-
-            const validUrl = urlRegex.test(this.value);
-
-            if (!validUrl) {
-              this.isError = 'Ccылка не валидная';
               this.isValid = false;
               return;
             }
@@ -133,6 +137,10 @@ export default {
           isValid: false,
           isError: 'Поле является обязательным',
           value: '',
+          isTouched: false,
+          isCheckTouched() {
+            this.isTouched = true;
+          },
           isCheckValid() {
             if (!this.value) {
               this.isError = 'Поле является обязательным';
@@ -146,22 +154,30 @@ export default {
       ],
       dataNewCard: {},
       isLoading: false,
+      isValid: false,
     };
-  },
-  computed: {
-    isFormValid() {
-      const indexInput = this.inputs.findIndex((input) => !input.isValid);
-      return (indexInput === -1);
-    },
   },
   methods: {
     async handleSubmit() {
       this.isLoading = true;
       this.inputs.forEach((item) => {
         this.dataNewCard[item.name] = item.value;
+
+        // eslint-disable-next-line no-param-reassign
+        item.isTouched = false;
+        // eslint-disable-next-line no-param-reassign
+        item.value = '';
+        // eslint-disable-next-line no-param-reassign
+        item.isValid = '';
       });
+      this.inputs[1].isValid = true;
       this.addNewCard(this.dataNewCard);
       this.isLoading = false;
+      this.isValid = false;
+    },
+    changeValue() {
+      const isArrayValidInputs = this.inputs.filter((input) => input.isValid === true);
+      this.isValid = (isArrayValidInputs.length === 4);
     },
   },
 };
